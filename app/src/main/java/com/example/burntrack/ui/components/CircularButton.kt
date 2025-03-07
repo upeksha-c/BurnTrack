@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 fun CircularButton(label: String){
     Box(
         modifier = Modifier
-            .size(80.dp)
+            .size(90.dp)
             .clip(CircleShape)
             .background(Color.DarkGray)
             .clickable {  }

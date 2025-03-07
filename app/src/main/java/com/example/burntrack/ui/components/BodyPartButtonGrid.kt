@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -20,13 +21,13 @@ fun BodyPartButtonGrid(modifier: Modifier = Modifier, parts: List<String>) {
 
     Column(
         modifier = modifier
-            .padding(16.dp)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         rows.forEach { row ->
             // For each row, create a horizontal row of buttons
             Row(
-                horizontalArrangement = Arrangement.spacedBy(20.dp),
-                modifier = Modifier.fillMaxWidth()
+                horizontalArrangement = Arrangement.spacedBy(25.dp),
             ) {
                 row.forEach { part ->
                     CircularButton(label = part)
