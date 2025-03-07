@@ -14,10 +14,15 @@ import androidx.navigation.NavController
 import com.example.burntrack.R
 import com.example.burntrack.ui.components.AppTitle
 import com.example.burntrack.ui.components.MainTopBar
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.burntrack.ui.components.BodyParts
+import com.example.burntrack.viewmodel.BodyPartViewModel
 
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, bodyPartViewModel: BodyPartViewModel = viewModel()) {
     Scaffold (
         topBar = { MainTopBar("BurnTrack", navController) }
     ){ innerPadding ->
@@ -32,6 +37,12 @@ fun HomeScreen(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
+            )
+            BodyParts(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                bodyPartViewModel.bodyParts
             )
         }
     }
