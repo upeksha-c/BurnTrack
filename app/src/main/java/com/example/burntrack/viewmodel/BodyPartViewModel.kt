@@ -8,5 +8,11 @@ class BodyPartViewModel: ViewModel() {
         bodyParts.add("Arms")
         bodyParts.add("Legs")
         bodyParts.add("Belly")
+        bodyParts.add("Arms")
+        bodyParts.add("Legs")
+        bodyParts.add("Belly")
+        bodyParts.add("Arms")
+        bodyParts.add("Legs")
+        bodyParts.add("Belly")
     }
 }

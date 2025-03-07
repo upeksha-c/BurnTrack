@@ -17,7 +17,7 @@ import com.example.burntrack.ui.components.MainTopBar
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.burntrack.ui.components.BodyParts
+import com.example.burntrack.ui.components.BodyPartButtonGrid
 import com.example.burntrack.viewmodel.BodyPartViewModel
 
 
@@ -38,7 +38,7 @@ fun HomeScreen(navController: NavController, bodyPartViewModel: BodyPartViewMode
                     .fillMaxWidth()
                     .padding(16.dp)
             )
-            BodyParts(
+            BodyPartButtonGrid(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),

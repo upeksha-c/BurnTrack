@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+/*
 @Composable
 fun BodyParts(modifier: Modifier = Modifier, parts: List<String>) {
     LazyColumn (
@@ -24,4 +25,4 @@ fun BodyParts(modifier: Modifier = Modifier, parts: List<String>) {
             HorizontalDivider(color = Color.LightGray, thickness = 2.dp)
         }
     }
-}
+}*/
