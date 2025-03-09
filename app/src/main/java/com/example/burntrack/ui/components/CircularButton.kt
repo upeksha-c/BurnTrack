@@ -28,7 +28,7 @@ fun CircularButton(label: String, navController: NavController){
             .size(90.dp)
             .clip(CircleShape)
             .background(Color.DarkGray)
-            .clickable { navController.navigate(("matching_result")) }
+            .clickable { navController.navigate(("exercises_screen/$label")) }
             .border(
                 5.dp,
                 Color.Yellow,

@@ -1,15 +1,29 @@
 package com.example.burntrack.viewmodel
 
+import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.burntrack.model.Exercise
+import com.example.burntrack.model.ExercisesApi
+import kotlinx.coroutines.launch
 
 class ExercisesViewModel: ViewModel() {
-    val exercises = mutableListOf<String>()
+    var exercises = mutableStateListOf<Exercise>()
+        private set
 
-    init {
-        exercises.add("Test 1")
-        exercises.add("Test 2")
-        exercises.add("Test 3")
-        exercises.add("Test 4")
-        exercises.add("Test 5")
+    fun getExercisesList(bodyPart: String) {
+        viewModelScope.launch {
+            var exercisesApi : ExercisesApi? = null
+            try{
+                exercisesApi = ExercisesApi.getInstance()
+                exercises.clear()
+                exercises.addAll(exercisesApi.getExercises(bodyPart))
+            } catch (e: Exception) {
+                Log.d("ERROR", e.message.toString())
+            }
+        }
     }
+
+
 }

@@ -36,7 +36,9 @@ fun BurnTrackApp(){
     ){
         composable(route = "home") { HomeScreen(navController) }
         composable(route = "info") { InfoScreen(navController) }
-        composable(route = "matching_result") { ExercisesScreen(navController) }
+        composable(route = "exercises_screen/{bodyPart}") { backStackEntry ->
+            val bodyPart = backStackEntry.arguments?.getString("bodyPart") ?: "Unknown"
+            ExercisesScreen(navController =navController, bodyPart = bodyPart) }
     }
 }
 
