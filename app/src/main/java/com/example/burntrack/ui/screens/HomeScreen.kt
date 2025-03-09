@@ -46,7 +46,8 @@ fun HomeScreen(navController: NavController, bodyPartViewModel: BodyPartViewMode
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                bodyPartViewModel.bodyParts
+                bodyPartViewModel.bodyParts,
+                navController
             )
         }
     }

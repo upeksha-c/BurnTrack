@@ -9,7 +9,7 @@ const val BASE_URL = "https://exercisedb.p.rapidapi.com/exercises/"
 
 interface BodyPartsApi {
     @Headers(
-        "X-RapidAPI-Key: ...."
+        "X-RapidAPI-Key: 5a84c1220fmsh3675406138a814ep171340jsne32ff6d7ed7d"
     )
 
     @GET("bodyPartList")

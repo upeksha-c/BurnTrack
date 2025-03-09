@@ -18,16 +18,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 
 @Composable
-fun CircularButton(label: String){
+fun CircularButton(label: String, navController: NavController){
     Box(
         modifier = Modifier
             .size(90.dp)
             .clip(CircleShape)
             .background(Color.DarkGray)
-            .clickable {  }
+            .clickable { navController.navigate(("matching_result")) }
             .border(
                 5.dp,
                 Color.Yellow,

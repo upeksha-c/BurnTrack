@@ -11,11 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
+import androidx.navigation.NavController
 
 
 @Composable
-fun BodyPartButtonGrid(modifier: Modifier = Modifier, parts: List<String>) {
+fun BodyPartButtonGrid(modifier: Modifier = Modifier, parts: List<String>,  navController: NavController) {
     // Split the list into chunks of 3
     val rows = parts.chunked(3)
 
@@ -30,7 +30,7 @@ fun BodyPartButtonGrid(modifier: Modifier = Modifier, parts: List<String>) {
                 horizontalArrangement = Arrangement.spacedBy(25.dp),
             ) {
                 row.forEach { part ->
-                    CircularButton(label = part)
+                    CircularButton(label = part, navController)
                 }
             }
             // Space between rows
