@@ -12,7 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
@@ -45,7 +47,9 @@ fun ExerciseCardList(modifier: Modifier = Modifier, exercises: List<Exercise>) {
         items(exercises) { exercise ->
             Text(
                 text = exercise.name.toTitleFormat(),
-                modifier = Modifier.padding(top = 4.dp, bottom = 4.dp)
+                modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp
             )
 
             // Display the GIF image for the exercise
@@ -55,7 +59,15 @@ fun ExerciseCardList(modifier: Modifier = Modifier, exercises: List<Exercise>) {
                     .fillMaxWidth()
                     .height(350.dp)
             )
-            HorizontalDivider(color = Color.LightGray, thickness = 2.dp)
+
+            //display instructions
+            exercise.instructions.forEachIndexed() { index,instruction ->
+                Text(
+                    text = "${index + 1}. $instruction",
+                    modifier = Modifier.padding(top = 9.dp)
+                )
+            }
+            HorizontalDivider(color = Color.LightGray, thickness = 2.dp, modifier = Modifier.padding(top = 10.dp, bottom = 10.dp))
         }
     }
 }
