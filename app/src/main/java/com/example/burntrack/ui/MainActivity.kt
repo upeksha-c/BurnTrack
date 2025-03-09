@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.burntrack.ui.screens.ExcercisesScreen
+import com.example.burntrack.ui.screens.ExercisesScreen
 import com.example.burntrack.ui.screens.HomeScreen
 import com.example.burntrack.ui.screens.InfoScreen
 import com.example.burntrack.ui.theme.BurnTrackTheme
@@ -36,7 +36,7 @@ fun BurnTrackApp(){
     ){
         composable(route = "home") { HomeScreen(navController) }
         composable(route = "info") { InfoScreen(navController) }
-        composable(route = "matching_result") { ExcercisesScreen(navController) }
+        composable(route = "matching_result") { ExercisesScreen(navController) }
     }
 }
 
