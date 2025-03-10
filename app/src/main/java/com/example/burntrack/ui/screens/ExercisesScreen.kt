@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -49,7 +51,10 @@ fun ExerciseCardList(modifier: Modifier = Modifier, exercises: List<Exercise>) {
         items(exercises) { exercise ->
             Card (
                 modifier = Modifier.fillMaxWidth().padding(top = 5.dp, bottom = 10.dp),
-                elevation  = CardDefaults.elevatedCardElevation(defaultElevation = 10.dp)
+                elevation  = CardDefaults.elevatedCardElevation(defaultElevation = 10.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                )
             ){
                 Column (
                     modifier = Modifier.padding(15.dp)
@@ -58,7 +63,8 @@ fun ExerciseCardList(modifier: Modifier = Modifier, exercises: List<Exercise>) {
                         text = exercise.name.toTitleFormat(),
                         modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
                         fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp
+                        fontSize = 24.sp,
+                        color = MaterialTheme.colorScheme.onPrimary,
                     )
 
                     // Display the GIF image for the exercise
@@ -74,7 +80,8 @@ fun ExerciseCardList(modifier: Modifier = Modifier, exercises: List<Exercise>) {
                     exercise.instructions.forEachIndexed { index,instruction ->
                         Text(
                             text = "${index + 1}. $instruction",
-                            modifier = Modifier.padding(top = 9.dp)
+                            modifier = Modifier.padding(top = 9.dp),
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 }

@@ -31,8 +31,8 @@ fun MainTopBar(title: String, navController: NavController){
     var expanded by remember { mutableStateOf(false) }
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary
+            containerColor = MaterialTheme.colorScheme.primary,
+            titleContentColor = MaterialTheme.colorScheme.onSecondary
         ),
         title = {
             Text(
@@ -41,7 +41,6 @@ fun MainTopBar(title: String, navController: NavController){
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.Serif,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
                     .fillMaxWidth()
             )

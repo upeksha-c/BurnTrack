@@ -2,6 +2,7 @@ package com.example.burntrack.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,7 +19,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.shadow
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.burntrack.ui.components.BodyPartButtonGrid
 import com.example.burntrack.viewmodel.BodyPartViewModel
@@ -41,6 +44,13 @@ fun HomeScreen(navController: NavController, bodyPartViewModel: BodyPartViewMode
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
+                    .border(
+                        width = 2.dp,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    .shadow(
+                        elevation = 12.dp,
+                    )
             )
             BodyPartButtonGrid(
                 modifier = Modifier

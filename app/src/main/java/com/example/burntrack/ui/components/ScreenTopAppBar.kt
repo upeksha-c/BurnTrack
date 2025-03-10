@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -17,11 +18,14 @@ import androidx.navigation.NavController
 fun ScreenTopAppBar(title:String, navController: NavController){
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary,
+            containerColor = MaterialTheme.colorScheme.primary,
+            titleContentColor = MaterialTheme.colorScheme.onPrimary,
         ),
         title = {
-            Text (text = title)
+            Text (
+                text = title,
+                fontWeight = FontWeight.Bold
+            )
         },
         navigationIcon = {
             IconButton(onClick = {navController.navigateUp()}) {

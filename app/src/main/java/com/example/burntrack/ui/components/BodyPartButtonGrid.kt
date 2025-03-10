@@ -17,17 +17,17 @@ import androidx.navigation.NavController
 @Composable
 fun BodyPartButtonGrid(modifier: Modifier = Modifier, parts: List<String>,  navController: NavController) {
     // Split the list into chunks of 3
-    val rows = parts.chunked(3)
+    val rows = parts.chunked(2)
 
     Column(
         modifier = modifier
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         rows.forEach { row ->
             // For each row, create a horizontal row of buttons
             Row(
-                horizontalArrangement = Arrangement.spacedBy(25.dp),
+                horizontalArrangement = Arrangement.spacedBy(15.dp),
             ) {
                 row.forEach { part ->
                     CircularButton(label = part, navController)
