@@ -1,22 +1,25 @@
 package com.example.burntrack.ui.screens
 
+
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,55 +41,89 @@ fun ExercisesScreen(navController: NavController, modifier: Modifier = Modifier,
     Scaffold(
         topBar = {ScreenTopAppBar(bodyPart.uppercase(), navController)},
     ){innerPadding ->
-        ExerciseCardList(modifier.padding(innerPadding), exercisesViewModel.exercises)
+
+            if (exercisesViewModel.isLoading.value) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding),
+                    contentAlignment = Alignment.Center
+                )
+                {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ){
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(50.dp),
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                        Text(
+                            text = "Loading exercises...",
+                            modifier = Modifier
+                                .padding(8.dp),
+                            color = MaterialTheme.colorScheme.onPrimary
+
+                        )
+                    }
+
+                }
+            } else {
+                LazyColumn (
+                    modifier = modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                        .padding(16.dp)
+                ){
+                    items(exercisesViewModel.exercises) { exercise ->
+                        ExerciseCard(exercise)
+                    }
+                }
+
+            }
+
+
     }
 }
 
 @Composable
-fun ExerciseCardList(modifier: Modifier = Modifier, exercises: List<Exercise>) {
-    LazyColumn (
-        modifier = modifier
-            .padding(16.dp)
+fun ExerciseCard(exercise: Exercise) {
+    Card (
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 5.dp, bottom = 10.dp),
+        elevation  = CardDefaults.elevatedCardElevation(defaultElevation = 10.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        )
     ){
-        items(exercises) { exercise ->
-            Card (
-                modifier = Modifier.fillMaxWidth().padding(top = 5.dp, bottom = 10.dp),
-                elevation  = CardDefaults.elevatedCardElevation(defaultElevation = 10.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surface
+        Column (
+            modifier = Modifier.padding(15.dp)
+        ) {
+            Text(
+                text = exercise.name.toTitleFormat(),
+                modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = MaterialTheme.colorScheme.onPrimary,
                 )
-            ){
-                Column (
-                    modifier = Modifier.padding(15.dp)
-                ) {
-                    Text(
-                        text = exercise.name.toTitleFormat(),
-                        modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp,
-                        color = MaterialTheme.colorScheme.onPrimary,
-                    )
 
-                    // Display the GIF image for the exercise
-                    GlideImage(
-                        imageModel = { exercise.gifUrl },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(350.dp)
-                            .padding(top = 4.dp, bottom = 4.dp)
-                    )
+            // Display the GIF image for the exercise
+            GlideImage(
+                imageModel = { exercise.gifUrl },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(350.dp)
+                    .padding(top = 4.dp, bottom = 4.dp)
+            )
 
-                    //display instructions
-                    exercise.instructions.forEachIndexed { index,instruction ->
-                        Text(
-                            text = "${index + 1}. $instruction",
-                            modifier = Modifier.padding(top = 9.dp),
-                            color = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
-                }
+            //display instructions
+            exercise.instructions.forEachIndexed { index,instruction ->
+                Text(
+                    text = "${index + 1}. $instruction",
+                    modifier = Modifier.padding(top = 9.dp),
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
-
         }
     }
 }

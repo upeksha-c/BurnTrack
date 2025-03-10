@@ -1,11 +1,11 @@
 package com.example.burntrack.ui.screens
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,13 +13,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.burntrack.R
-import com.example.burntrack.ui.components.AppTitle
 import com.example.burntrack.ui.components.MainTopBar
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.shadow
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -36,7 +35,9 @@ fun HomeScreen(navController: NavController, bodyPartViewModel: BodyPartViewMode
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
+
         ) {
             Image(
                 painter = painterResource(id = R.drawable.body),
@@ -52,13 +53,28 @@ fun HomeScreen(navController: NavController, bodyPartViewModel: BodyPartViewMode
                         elevation = 12.dp,
                     )
             )
-            BodyPartButtonGrid(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                bodyPartViewModel.bodyParts,
-                navController
-            )
+            if (bodyPartViewModel.isLoading.value){
+                CircularProgressIndicator(
+                    modifier = Modifier.size(50.dp),
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+                Text(
+                    text = "Loading body parts...",
+                    modifier = Modifier
+                        .padding(8.dp),
+                    color = MaterialTheme.colorScheme.onPrimary
+
+                )
+            }else{
+                BodyPartButtonGrid(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    bodyPartViewModel.bodyParts,
+                    navController
+                )
+            }
+
         }
     }
 
