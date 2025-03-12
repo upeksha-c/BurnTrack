@@ -29,11 +29,7 @@ class BodyPartViewModel: ViewModel() {
         viewModelScope.launch {
             var bodyPartApi : BodyPartsApi? = null
             try {
-                delay(100)
                 bodyPartApi = BodyPartsApi.getInstance()
-                //bodyParts.clear()
-                //bodyParts.addAll(bodyPartApi.getBodyPartList())
-                //bodyPartUiState = BodyPartUiState.Success(bodyPartApi.getBodyPartList())
                 val bodyParts = BodyPartsApi.getInstance().getBodyPartList()
 
                 if (bodyParts.isNotEmpty()) {

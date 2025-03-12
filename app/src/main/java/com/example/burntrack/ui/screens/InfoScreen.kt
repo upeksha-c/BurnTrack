@@ -6,17 +6,19 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.burntrack.R
 import com.example.burntrack.ui.components.ScreenTopAppBar
 
 @Composable
 fun InfoScreen(navController: NavController){
     Scaffold(
-        topBar = {ScreenTopAppBar("Info", navController)},
+        topBar = {ScreenTopAppBar(stringResource(R.string.info), navController)},
     ){innerPadding ->
         Text(
-            text = "Welcome to BurnTrack – your personal fitness companion! BurnTrack helps you discover the best exercises for different muscle groups with ease. Whether you're a beginner or a fitness expert, this app provides a structured way to explore workouts tailored to your needs.",
+            text = stringResource(R.string.description),
             modifier = Modifier
                 .padding(innerPadding)
                 .padding(top = 30.dp),

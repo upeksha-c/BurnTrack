@@ -18,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.burntrack.ui.components.BodyPartButtonGrid
 import com.example.burntrack.viewmodel.BodyPartUiState
@@ -30,7 +31,7 @@ import com.example.burntrack.viewmodel.BodyPartViewModel
 @Composable
 fun HomeScreen(navController: NavController, bodyPartViewModel: BodyPartViewModel = viewModel()) {
     Scaffold (
-        topBar = { MainTopBar("BurnTrack", navController) }
+        topBar = { MainTopBar(stringResource(R.string.Title), navController) }
     ){ innerPadding ->
         Column (
             modifier = Modifier
@@ -46,7 +47,7 @@ fun HomeScreen(navController: NavController, bodyPartViewModel: BodyPartViewMode
                 is BodyPartUiState.Success -> {
                     Image(
                         painter = painterResource(id = R.drawable.body),
-                        contentDescription = "BurnTrack home",
+                        contentDescription = stringResource(R.string.burntrack_home),
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp)

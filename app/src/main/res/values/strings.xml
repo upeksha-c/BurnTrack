@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BurnTrack</string>
+    <string name="description">Welcome to BurnTrack – your personal fitness companion! BurnTrack helps you discover the best exercises for different muscle groups with ease. Whether you\'re a beginner or a fitness expert, this app provides a structured way to explore workouts tailored to your needs.</string>
+    <string name="info">Info</string>
+    <string name="error">Error retrieving data. Please try again.</string>
+    <string name="Title">BurnTrack</string>
+    <string name="burntrack_home">BurnTrack home</string>
 </resources>

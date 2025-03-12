@@ -37,7 +37,7 @@ fun MainTopBar(title: String, navController: NavController){
         title = {
             Text(
                 text = title,
-                fontSize = 46.sp,
+                style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.Serif,
                 textAlign = TextAlign.Center,

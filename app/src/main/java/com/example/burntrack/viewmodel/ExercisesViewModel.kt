@@ -27,7 +27,6 @@ class ExercisesViewModel: ViewModel() {
         viewModelScope.launch {
             var exercisesApi : ExercisesApi? = null
             try{
-                delay(100)
                 exercisesApi = ExercisesApi.getInstance()
                 val exercises = ExercisesApi.getInstance().getExercises(bodyPart)
                 exercisesUiState = ExercisesUiState.Success(exercises)

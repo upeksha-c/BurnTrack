@@ -8,8 +8,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.burntrack.R
 
 @Composable
 fun ErrorScreen() {
@@ -20,7 +22,7 @@ fun ErrorScreen() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Error retrieving data. Please try again.",
+            text = stringResource(R.string.error),
             fontSize = 20.sp,
             modifier = Modifier.padding(8.dp),
             color = MaterialTheme.colorScheme.onPrimary
