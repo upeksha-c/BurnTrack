@@ -17,7 +17,7 @@ data class Exercise(
 )
 
 // Base URL for the API service
-const val BASE_URL = "https://exercisedb.p.rapidapi.com"
+const val BASE_URL = "ttps://exercisedb.p.rapidapi.com"
 
 // Retrofit interface to define API endpoints
 interface ExercisesApi {

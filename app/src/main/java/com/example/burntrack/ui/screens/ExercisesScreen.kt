@@ -27,6 +27,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.burntrack.model.Exercise
 import com.example.burntrack.ui.components.ScreenTopAppBar
+import com.example.burntrack.viewmodel.ExercisesUiState
 import com.example.burntrack.viewmodel.ExercisesViewModel
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -42,44 +43,17 @@ fun ExercisesScreen(navController: NavController, modifier: Modifier = Modifier,
         topBar = {ScreenTopAppBar(bodyPart.uppercase(), navController)},
     ){innerPadding ->
 
-            if (exercisesViewModel.isLoading.value) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding),
-                    contentAlignment = Alignment.Center
-                )
-                {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ){
-                        CircularProgressIndicator(
-                            modifier = Modifier.size(50.dp),
-                            color = MaterialTheme.colorScheme.onPrimary
-                        )
-                        Text(
-                            text = "Loading exercises...",
-                            modifier = Modifier
-                                .padding(8.dp),
-                            color = MaterialTheme.colorScheme.onPrimary
-
-                        )
-                    }
-
-                }
-            } else {
-                LazyColumn (
-                    modifier = modifier
-                        .fillMaxSize()
-                        .padding(innerPadding)
-                        .padding(16.dp)
-                ){
-                    items(exercisesViewModel.exercises) { exercise ->
+        when (val state = exercisesViewModel.exercisesUiState) {
+            is ExercisesUiState.Loading -> LoadingScreen()
+            is ExercisesUiState.Error -> ErrorScreen()
+            is ExercisesUiState.Success -> {
+                LazyColumn(modifier = modifier.fillMaxSize().padding(innerPadding).padding(16.dp)) {
+                    items(state.exercises) { exercise ->
                         ExerciseCard(exercise)
                     }
                 }
-
             }
+        }
 
 
     }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,14 +15,16 @@ import com.example.burntrack.R
 import com.example.burntrack.ui.components.MainTopBar
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.shadow
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.burntrack.ui.components.BodyPartButtonGrid
+import com.example.burntrack.viewmodel.BodyPartUiState
 import com.example.burntrack.viewmodel.BodyPartViewModel
+
+
+
 
 
 @Composable
@@ -39,40 +40,33 @@ fun HomeScreen(navController: NavController, bodyPartViewModel: BodyPartViewMode
             horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.body),
-                contentDescription = "BurnTrack home",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-                    .border(
-                        width = 2.dp,
-                        color = MaterialTheme.colorScheme.primary,
+            when (val state = bodyPartViewModel.bodyPartUiState) {
+                is BodyPartUiState.Loading -> LoadingScreen()
+                is BodyPartUiState.Error -> ErrorScreen()
+                is BodyPartUiState.Success -> {
+                    Image(
+                        painter = painterResource(id = R.drawable.body),
+                        contentDescription = "BurnTrack home",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                            .border(
+                                width = 2.dp,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            .shadow(
+                                elevation = 12.dp,
+                            )
                     )
-                    .shadow(
-                        elevation = 12.dp,
-                    )
-            )
-            if (bodyPartViewModel.isLoading.value){
-                CircularProgressIndicator(
-                    modifier = Modifier.size(50.dp),
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
-                Text(
-                    text = "Loading body parts...",
-                    modifier = Modifier
-                        .padding(8.dp),
-                    color = MaterialTheme.colorScheme.onPrimary
 
-                )
-            }else{
-                BodyPartButtonGrid(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    bodyPartViewModel.bodyParts,
-                    navController
-                )
+                    BodyPartButtonGrid(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        state.bodyParts,
+                        navController
+                    )
+                }
             }
 
         }
